@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from Chat.models import Friend, Profile
+
 # Create your views here.
 
 def home(request):
@@ -12,5 +14,9 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def detail(request):
-    return render(request, "detail.html")
+def detail(request, pk):
+    friend = Friend.objects.get(id=pk)
+    context = {
+        "friend":friend,
+    }
+    return render(request, "detail.html", context)

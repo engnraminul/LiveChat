@@ -5,5 +5,5 @@ from .import views
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('detail/', views.detail, name="detail"),
+    path('detail/<str:pk>/', views.detail, name="detail"),
 ]
