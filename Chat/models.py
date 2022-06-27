@@ -21,7 +21,7 @@ class Friend(models.Model):
 class ChatMessage(models.Model):
     body = models.TextField()
     msg_sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="msg_sernder")
-    msg_receciver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="msg_receiver")
+    msg_receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="msg_receiver")
     seen = models.BooleanField(default=False)
 
     def __str__(self):

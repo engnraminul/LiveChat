@@ -37,7 +37,7 @@
            </a>
         </div>
 
-        <h3>{{friend.profile.name}}</h3>
+        <h5 class="fw-bold text-success">{{friend.profile.name}}</h5>
 
         <div class="pro-pic">
             <img src="{{friend.profile.image.url}}" alt="profile-picture">
@@ -50,7 +50,6 @@
 
 
         <div class="chat-body" id="chat-body">
-
             
             {% for chat in chats %}
             {% if chat.msg_sender == user and chat.msg_receiver == profile %}
@@ -83,7 +82,7 @@
             
         </div>
     
-        <form method="POST">
+        <form id="myform" method="POST">
             {% csrf_token %}
             
             {{chatform.body}}

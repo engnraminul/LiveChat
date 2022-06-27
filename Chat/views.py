@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from Chat.models import Friend, Profile
+from Chat.models import ChatMessage, Friend, Profile
 from .forms import ChatMessageForm
 
 # Create your views here.
@@ -19,6 +19,7 @@ def detail(request,pk):
     friend = Friend.objects.get(id=pk)
     user = request.user.profile
     profile = Profile.objects.get(id=friend.profile.id)
+    chats = ChatMessage.objects.all()
     chatform = ChatMessageForm()
     if request.method == "POST":
         form = ChatMessageForm(request.POST)
@@ -33,5 +34,6 @@ def detail(request,pk):
         "chatform":chatform,
         "user":user,
         "profile":profile,
+        "chats":chats,
     }
     return render(request, "detail.html", context)
