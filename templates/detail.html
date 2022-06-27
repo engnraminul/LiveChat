@@ -16,7 +16,7 @@
 <div class="chat-container2">
     <div class="identity">
         <div>
-           <a href="">
+           <a href="{% url 'home' %}">
             <svg
             xmlns="http://www.w3.org/2000/svg"
             width="26"
@@ -83,13 +83,14 @@
             
         </div>
     
-        <form action="" id="myform" method="POST">
+        <form method="POST">
             {% csrf_token %}
             
             {{chatform.body}}
             
             <button type = "submit" id = "submit">Send</button>
         </form>
+
 
 
     </div>
