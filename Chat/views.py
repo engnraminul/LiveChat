@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import redirect, render
 
 from Chat.models import ChatMessage, Friend, Profile
@@ -42,4 +43,11 @@ def detail(request,pk):
 
 
 def SendMessages(request, pk):
-    return JsonResponse("Fine", safe=False)
+    user = request.user.profile
+    friend = Friend.objects.get(profile_id=pk)
+    profile = Profile.objects.get(id=friend.profile.id)
+    data = json.loads(request.body)
+    new_chat = data["msg"]
+    new_chat_message = ChatMessage.objects.create(body=new_chat, msg_sender=user, msg_receiver=profile, seen = False)
+    print(new_chat)
+    return JsonResponse(new_chat_message.body, safe=False)
