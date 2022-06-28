@@ -130,7 +130,7 @@
 
         const data = { msg: chatMessage };
         
-        let url = ""
+        let url = "{% url 'send_msg' friend.profile.id %}"
 
 fetch(url, {
   method: 'POST', // or 'PUT'
