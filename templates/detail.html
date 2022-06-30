@@ -174,7 +174,7 @@ let counter = {{num}}
 function receiveMessages(){
 
 
-    let url = ""
+    let url = "{% url 'received_msg' friend.profile.id %}"
 
         fetch(url)
         .then(response => response.json())

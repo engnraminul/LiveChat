@@ -51,3 +51,13 @@ def SendMessages(request, pk):
     new_chat_message = ChatMessage.objects.create(body=new_chat, msg_sender=user, msg_receiver=profile, seen = False)
     print(new_chat)
     return JsonResponse(new_chat_message.body, safe=False)
+
+def ReceivedMessage(request, pk):
+    user = request.user.profile
+    friend = Friend.objects.get(profile_id=pk)
+    profile = Profile.objects.get(id=friend.profile.id)
+    arr = []
+    chats = ChatMessage.objects.filter(msg_sender=profile, msg_receiver=user)
+    for chat in chats:
+        arr.append(chat.body)
+    return JsonResponse(arr, safe=False)
