@@ -38,6 +38,7 @@ def detail(request,pk):
         "user":user,
         "profile":profile,
         "chats":chats,
+        "num":rec_chats.count()
     }
     return render(request, "detail.html", context)
 
@@ -60,4 +61,14 @@ def ReceivedMessage(request, pk):
     chats = ChatMessage.objects.filter(msg_sender=profile, msg_receiver=user)
     for chat in chats:
         arr.append(chat.body)
+    return JsonResponse(arr, safe=False)
+
+
+def notification(request):
+    user = request.user.profile
+    friends = user.friends.all()
+    arr = []
+    for friend in friends:
+        chats = ChatMessage.objects.filter(msg_sender__id=friend.profile.id, msg_receiver=user, seen=False)
+        arr.append(chats.count())
     return JsonResponse(arr, safe=False)
